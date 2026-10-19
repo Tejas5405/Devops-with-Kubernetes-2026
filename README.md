@@ -15,6 +15,10 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 | 1.7 — External access with Ingress | `1.1-log-output/` | [Exercise 1.7 — External access with Ingress](https://github.com/Tejas5405/K8/releases/tag/1.7) |
 | 1.8 — The project, step 5 | `1.2-todo-app/` | [Exercise 1.8 — The project, step 5](https://github.com/Tejas5405/K8/releases/tag/1.8) |
 | 1.9 — More services | `1.9-ping-pong/` + `1.1-log-output/` | [Exercise 1.9 — More services](https://github.com/Tejas5405/K8/releases/tag/1.9) |
+| 1.10 — Even more services | `1.10-split-log/` | [Exercise 1.10 — Even more services](https://github.com/Tejas5405/K8/releases/tag/1.10) |
+| 1.11 — Persisting data | `storage/` + `1.1-log-output/` + `1.9-ping-pong/` | [Exercise 1.11 — Persisting data](https://github.com/Tejas5405/K8/releases/tag/1.11) |
+| 1.12 — The project, step 6 | `1.2-todo-app/` + `storage/` | [Exercise 1.12 — The project, step 6](https://github.com/Tejas5405/K8/releases/tag/1.12) |
+| 1.13 — The project, step 7 | `1.2-todo-app/` + `storage/` | [Exercise 1.13 — The project, step 7](https://github.com/Tejas5405/K8/releases/tag/1.13) |
 
 ## Submission
 
@@ -37,5 +41,13 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 - Exercise 1.8 directory at tag 1.8: https://github.com/Tejas5405/K8/tree/1.8/1.2-todo-app
 - Exercise 1.9 release: https://github.com/Tejas5405/K8/releases/tag/1.9
 - Exercise 1.9 directory at tag 1.9: https://github.com/Tejas5405/K8/tree/1.9/1.9-ping-pong
+- Exercise 1.10 release: https://github.com/Tejas5405/K8/releases/tag/1.10
+- Exercise 1.10 directory at tag 1.10: https://github.com/Tejas5405/K8/tree/1.10/1.10-split-log
+- Exercise 1.11 release: https://github.com/Tejas5405/K8/releases/tag/1.11
+- Exercise 1.11 directory at tag 1.11: https://github.com/Tejas5405/K8/tree/1.11/storage
+- Exercise 1.12 release: https://github.com/Tejas5405/K8/releases/tag/1.12
+- Exercise 1.12 directory at tag 1.12: https://github.com/Tejas5405/K8/tree/1.12/1.2-todo-app
+- Exercise 1.13 release: https://github.com/Tejas5405/K8/releases/tag/1.13
+- Exercise 1.13 directory at tag 1.13: https://github.com/Tejas5405/K8/tree/1.13/1.2-todo-app
 
 Reviewer: mattiluukkainen
