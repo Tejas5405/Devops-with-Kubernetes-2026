@@ -6,12 +6,12 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 
 | Exercise | Directory | Release |
 |----------|-----------|---------|
-| 1.1 — Getting started | `1.1-log-output/` | [Exercise 1.1 — Getting started](https://github.com/OWNER/REPOSITORY/releases/tag/1.1) |
+| 1.1 — Getting started | `1.1-log-output/` | [Exercise 1.1 — Getting started](https://github.com/Tejas5405/K8/releases/tag/1.1) |
 
 ## Submission
 
-- Repository: https://github.com/OWNER/REPOSITORY
-- Exercise 1.1 release: https://github.com/OWNER/REPOSITORY/releases/tag/1.1
-- Exercise 1.1 directory at tag 1.1: https://github.com/OWNER/REPOSITORY/tree/1.1/1.1-log-output
+- Repository: https://github.com/Tejas5405/K8
+- Exercise 1.1 release: https://github.com/Tejas5405/K8/releases/tag/1.1
+- Exercise 1.1 directory at tag 1.1: https://github.com/Tejas5405/K8/tree/1.1/1.1-log-output
 
 Reviewer: mattiluukkainen
