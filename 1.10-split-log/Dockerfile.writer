@@ -1,0 +1,9 @@
+FROM node:24-alpine
+
+WORKDIR /app
+
+COPY writer.js .
+
+USER node
+
+CMD ["node", "writer.js"]

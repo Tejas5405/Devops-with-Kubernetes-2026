@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-output-split
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-output-split
+  template:
+    metadata:
+      labels:
+        app: log-output-split
+    spec:
+      volumes:
+        - name: shared-log
+          emptyDir: {}
+      containers:
+        - name: log-writer
+          image: log-writer:1.10
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: shared-log
+              mountPath: /usr/src/app/files
+        - name: log-reader
+          image: log-reader:1.10
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: "3000"
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: shared-log
+              mountPath: /usr/src/app/files

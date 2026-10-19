@@ -2,20 +2,28 @@
 
 ## Behavior
 
-The application is a simple web server that listens on a configurable port (via the `PORT` environment variable, default 3000). When the server starts, it prints `Server started in port NNNN` to stdout.
+The application is a todo web server with the following features:
+
+- Serves an HTML page with a cached image from Lorem Picsum (refreshed every 10 minutes)
+- Image is cached in a Persistent Volume so it survives container restarts
+- Input field (max 140 characters) for entering todos
+- Send button
+- List of hardcoded todos
+- Listens on configurable port via `PORT` environment variable (default 3000)
+- Logs `Server started in port NNNN` on startup
 
 ## Build and run locally
 
 Build the image:
 
 ```
-docker build -t todo-app:1.2 ./1.2-todo-app
+docker build -t todo-app:1.13 ./1.2-todo-app
 ```
 
 Run the container:
 
 ```
-docker run --rm -p 3000:3000 -e PORT=3000 todo-app:1.2
+docker run --rm -p 3000:3000 -e PORT=3000 todo-app:1.13
 ```
 
 Run with Node.js directly:
@@ -26,20 +34,17 @@ PORT=3000 node 1.2-todo-app/app.js
 
 ## Deploy to Kubernetes
 
-Build and import the image into the k3d cluster:
-
 ```
-docker build -t todo-app:1.2 ./1.2-todo-app
-k3d image import todo-app:1.2 -c k3s-default
+docker build -t todo-app:1.13 ./1.2-todo-app
+k3d image import todo-app:1.13 -c k3s-default
+kubectl apply -f storage/image-cache-pv.yaml
+kubectl apply -f storage/image-cache-pvc.yaml
 kubectl apply -f 1.2-todo-app/manifests/deployment.yaml
-kubectl rollout status deployment/todo-app --timeout=120s
+kubectl apply -f 1.2-todo-app/manifests/service.yaml
+kubectl apply -f 1.2-todo-app/manifests/ingress.yaml
 ```
 
-Inspect logs:
-
-```
-kubectl logs deployment/todo-app
-```
+Test via Ingress at `http://localhost:8081/`.
 
 ## README
 

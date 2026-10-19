@@ -12,12 +12,22 @@ spec:
       labels:
         app: todo-app
     spec:
+      volumes:
+        - name: image-cache
+          persistentVolumeClaim:
+            claimName: image-cache-pvc
       containers:
         - name: todo-app
-          image: todo-app:1.2
+          image: todo-app:1.13
           imagePullPolicy: IfNotPresent
           env:
             - name: PORT
               value: "3000"
           ports:
             - containerPort: 3000
+          volumeMounts:
+            - name: image-cache
+              mountPath: /data
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0

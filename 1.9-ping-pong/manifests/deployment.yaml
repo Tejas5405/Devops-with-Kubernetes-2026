@@ -12,12 +12,22 @@ spec:
       labels:
         app: ping-pong
     spec:
+      volumes:
+        - name: course-storage
+          persistentVolumeClaim:
+            claimName: course-pvc
       containers:
         - name: ping-pong
-          image: ping-pong:1.9
+          image: ping-pong:1.11
           imagePullPolicy: IfNotPresent
           env:
             - name: PORT
               value: "3000"
           ports:
             - containerPort: 3000
+          volumeMounts:
+            - name: course-storage
+              mountPath: /data
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
