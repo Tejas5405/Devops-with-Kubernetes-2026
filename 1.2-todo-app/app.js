@@ -19,21 +19,27 @@ const PG_DATABASE = process.env.PG_DATABASE || "postgres";
 
 fs.mkdirSync(CACHE_DIR, { recursive: true });
 
-const client = new Client({
-  host: PG_HOST,
-  port: PG_PORT,
-  user: PG_USER,
-  password: PG_PASSWORD,
-  database: PG_DATABASE,
-});
+const MAX_TODO_LENGTH = 140;
+let isHealthy = true;
+let dbReady = false;
+let client = null;
 
-let connected = false;
+const createClient = () => {
+  return new Client({
+    host: PG_HOST,
+    port: PG_PORT,
+    user: PG_USER,
+    password: PG_PASSWORD,
+    database: PG_DATABASE,
+  });
+};
 
 const connectWithRetry = async () => {
-  while (!connected) {
+  while (!dbReady) {
+    client = createClient();
     try {
       await client.connect();
-      connected = true;
+      dbReady = true;
       await client.query(`
         CREATE TABLE IF NOT EXISTS todos (
           id SERIAL PRIMARY KEY,
@@ -44,6 +50,9 @@ const connectWithRetry = async () => {
       console.log("Connected to Postgres and initialized todos table");
     } catch (err) {
       console.error("Postgres connection failed, retrying in 2s...", err.message);
+      try {
+        await client.end();
+      } catch (_) {}
       await new Promise((r) => setTimeout(r, 2000));
     }
   }
@@ -87,22 +96,28 @@ const fetchImage = (maxRedirects = 5) => {
 const getTodosHtml = async () => {
   try {
     const result = await client.query(
-      `SELECT text FROM todos ORDER BY created_at DESC`
+      `SELECT id, text FROM todos ORDER BY created_at DESC`
     );
-    const todos = result.rows.map((row) => `<li>${row.text}</li>`).join("");
+    const todos = result.rows.map((row) => `<li>${row.text} <form method="POST" action="/todos/${row.id}" style="display:inline;"><button type="submit">Done</button></form></li>`).join("");
     return todos || "<li>No todos yet.</li>";
   } catch (err) {
     return "<li>Error loading todos.</li>";
   }
 };
 
-const MAX_TODO_LENGTH = 140;
-
 const addTodo = async (text) => {
   try {
     await client.query(`INSERT INTO todos (text) VALUES ($1)`, [text]);
   } catch (err) {
     console.error("Error adding todo:", err.message);
+  }
+};
+
+const markTodoDone = async (id) => {
+  try {
+    await client.query(`UPDATE todos SET text = CONCAT('[DONE] ', text) WHERE id = $1`, [id]);
+  } catch (err) {
+    console.error("Error marking todo done:", err.message);
   }
 };
 
@@ -135,6 +150,13 @@ const server = http.createServer(async (req, res) => {
 <input type="text" name="todo" placeholder="Enter a todo (max 140 chars)" maxlength="140" style="width:300px; margin-bottom:10px; display:block;">
 <button type="send">Send</button>
 </form>
+<form method="POST" action="/break" style="margin-top:20px; display:inline;">
+<button type="submit" style="background-color:#ff4444;color:white;">Break App</button>
+</form>
+<form method="POST" action="/unbreak" style="display:inline;margin-left:10px;">
+<button type="submit" style="background-color:#44ff44;color:black;">Unbreak App</button>
+</form>
+<p id="health">Status: ${isHealthy ? "Healthy" : "UNHEALTHY"}</p>
 <h2>Todos</h2>
 <ul>
 ${todosHtml}
@@ -174,6 +196,36 @@ ${todosHtml}
       res.setHeader("Location", "/");
       res.end();
     });
+  } else if (req.method === "POST" && req.url === "/break") {
+    logRequest("POST", "/break");
+    isHealthy = false;
+    res.statusCode = 302;
+    res.setHeader("Location", "/");
+    res.end();
+  } else if (req.method === "POST" && req.url === "/unbreak") {
+    logRequest("POST", "/unbreak");
+    isHealthy = true;
+    res.statusCode = 302;
+    res.setHeader("Location", "/");
+    res.end();
+  } else if (req.method === "GET" && req.url === "/healthz") {
+    logRequest("GET", "/healthz");
+    if (dbReady && isHealthy) {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify({ status: "ok" }));
+    } else {
+      res.statusCode = 503;
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify({ status: "unhealthy", dbReady, isHealthy }));
+    }
+  } else if (req.method === "POST" && req.url.startsWith("/todos/")) {
+    const id = req.url.split("/").pop();
+    logRequest("POST", req.url);
+    await markTodoDone(id);
+    res.statusCode = 302;
+    res.setHeader("Location", "/");
+    res.end();
   } else if (req.method === "GET" && req.url === "/image") {
     logRequest("GET", "/image");
     try {

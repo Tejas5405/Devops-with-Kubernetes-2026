@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: ping-pong:1.12
+          image: ping-pong:1.14
           imagePullPolicy: IfNotPresent
           env:
             - name: PORT
@@ -32,6 +32,12 @@ spec:
               value: "postgres"
           ports:
             - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
           securityContext:
             runAsUser: 0
             runAsGroup: 0

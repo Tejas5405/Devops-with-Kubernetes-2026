@@ -7,6 +7,7 @@ const HTTP_PORT = parseInt(process.env.PORT, 10) || 3000;
 const COUNTER_FILE = "/data/counter.txt";
 const INFO_FILE = "/config/information.txt";
 const MESSAGE = process.env.MESSAGE || "not set";
+const PINGPONG_URL = process.env.PINGPONG_URL || "http://ping-pong-svc.exercises.svc.cluster.local:2346/pingpong";
 
 const logMessage = (uuid) => {
   const timestamp = new Date().toISOString();
@@ -40,6 +41,19 @@ const readInfo = () => {
 
 const infoContent = readInfo();
 
+let pingpongReady = false;
+
+const checkPingPong = () => {
+  http.get(PINGPONG_URL, (res) => {
+    pingpongReady = res.statusCode === 200;
+  }).on("error", () => {
+    pingpongReady = false;
+  });
+};
+
+setInterval(checkPingPong, 5000);
+checkPingPong();
+
 const server = http.createServer((req, res) => {
   if (req.method === "GET" && req.url === "/") {
     const timestamp = new Date().toISOString();
@@ -47,6 +61,16 @@ const server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader("Content-Type", "text/plain");
     res.end(`file content: ${infoContent}\nenv variable: MESSAGE=${MESSAGE}\n${timestamp}: ${uuid}.\nPing / Pongs: ${pongs}\n`);
+  } else if (req.method === "GET" && req.url === "/healthz") {
+    if (pingpongReady) {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "text/plain");
+      res.end("ok\n");
+    } else {
+      res.statusCode = 503;
+      res.setHeader("Content-Type", "text/plain");
+      res.end("pingpong not reachable\n");
+    }
   } else {
     res.statusCode = 404;
     res.setHeader("Content-Type", "text/plain");

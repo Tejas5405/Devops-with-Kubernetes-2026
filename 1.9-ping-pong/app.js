@@ -8,21 +8,25 @@ const PG_USER = process.env.PG_USER || "postgres";
 const PG_PASSWORD = process.env.PG_PASSWORD || "example";
 const PG_DATABASE = process.env.PG_DATABASE || "postgres";
 
-const client = new Client({
-  host: PG_HOST,
-  port: PG_PORT,
-  user: PG_USER,
-  password: PG_PASSWORD,
-  database: PG_DATABASE,
-});
+let dbReady = false;
+let client = null;
 
-let connected = false;
+const createClient = () => {
+  return new Client({
+    host: PG_HOST,
+    port: PG_PORT,
+    user: PG_USER,
+    password: PG_PASSWORD,
+    database: PG_DATABASE,
+  });
+};
 
 const connectWithRetry = async () => {
-  while (!connected) {
+  while (!dbReady) {
+    client = createClient();
     try {
       await client.connect();
-      connected = true;
+      dbReady = true;
       await client.query(`
         CREATE TABLE IF NOT EXISTS counters (
           name TEXT PRIMARY KEY,
@@ -36,6 +40,9 @@ const connectWithRetry = async () => {
       console.log("Connected to Postgres and initialized counters table");
     } catch (err) {
       console.error("Postgres connection failed, retrying in 2s...", err.message);
+      try {
+        await client.end();
+      } catch (_) {}
       await new Promise((r) => setTimeout(r, 2000));
     }
   }
@@ -60,6 +67,16 @@ const server = http.createServer((req, res) => {
         res.setHeader("Content-Type", "text/plain");
         res.end("Database error\n");
       });
+  } else if (req.method === "GET" && req.url === "/healthz") {
+    if (dbReady) {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "text/plain");
+      res.end("ok\n");
+    } else {
+      res.statusCode = 503;
+      res.setHeader("Content-Type", "text/plain");
+      res.end("database not ready\n");
+    }
   } else {
     res.statusCode = 404;
     res.setHeader("Content-Type", "text/plain");
