@@ -86,4 +86,46 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 - Exercise 3.8 release: https://github.com/Tejas5405/K8/releases/tag/3.8
 - Exercise 3.8 directory at tag 3.8: https://github.com/Tejas5405/K8/tree/3.8/.github
 
+## Exercise 3.9 — DBaaS vs DIY
+
+### Database as a Service (Google Cloud SQL)
+
+**Pros:**
+- **Initial setup**: Minimal work — provision via console/CLI, Google manages provisioning, patching, and upgrades
+- **Maintenance**: Near zero operational overhead — Google handles backups, patching, high availability, and failover
+- **Backups**: Automated daily backups with point-in-time recovery; easy restore via console/API
+- **Scaling**: Vertical scaling (CPU/RAM/storage) with a few clicks; read replicas for read scaling
+- **Reliability**: Multi-zone replication and automatic failover built-in
+
+**Cons:**
+- **Cost**: Higher ongoing cost than self-hosted (premium for managed service)
+- **Vendor lock-in**: Tied to Google Cloud SQL; migration away requires effort
+- **Less control**: Limited configuration options for PostgreSQL parameters and extensions
+
+### Self-Hosted (Postgres StatefulSet + PVC on GKE)
+
+**Pros:**
+- **Initial setup**: Lower direct cost — only pay for GKE nodes and PersistentDisk storage
+- **Control**: Full control over PostgreSQL configuration, extensions, and version
+- **Cost**: No managed service premium; cost scales with node resources used
+
+**Cons:**
+- **Initial setup**: More work — define StatefulSet, headless Service, PVCs, volumeClaimTemplates; handle connection pooling
+- **Maintenance**: You manage patches, upgrades, backups, and failover; manual intervention needed for node failures
+- **Backups**: Must implement your own backup strategy (CronJob with pg_dump to GCS, as in exercise 3.10); restore is manual
+- **Scaling**: Vertical scaling requires node changes; no built-in read replicas
+- **Reliability**: Single replica = single point of failure unless you run multiple replicas with shared storage (RWO limitation)
+
+### Verdict
+
+For production workloads, **DBaaS (Cloud SQL)** is generally preferred — the operational savings and managed backups outweigh the cost premium. **Self-hosted** makes sense when you need specific PostgreSQL extensions/configuration not available in Cloud SQL, or when cost is the primary constraint and you have the operational capacity to manage it.
+
+## Exercise 3.11 — Resource Requests and Limits
+
+Resource requests and limits have been added to the todo-app deployment:
+- todo-app container: 100m CPU request / 250m CPU limit, 128Mi memory request / 256Mi memory limit
+- Postgres container: 100m CPU request / 500m CPU limit, 256Mi memory request / 512Mi memory limit
+- CronJob (curl): 50m CPU request / 100m CPU limit, 64Mi memory request / 128Mi memory limit
+
+
 Reviewer: mattiluukkainen
