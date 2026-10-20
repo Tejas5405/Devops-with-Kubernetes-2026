@@ -5,6 +5,8 @@ const fs = require("node:fs");
 const LOG_INTERVAL_MS = 5000;
 const HTTP_PORT = parseInt(process.env.PORT, 10) || 3000;
 const COUNTER_FILE = "/data/counter.txt";
+const INFO_FILE = "/config/information.txt";
+const MESSAGE = process.env.MESSAGE || "not set";
 
 const logMessage = (uuid) => {
   const timestamp = new Date().toISOString();
@@ -28,13 +30,23 @@ const readCounter = () => {
   }
 };
 
+const readInfo = () => {
+  try {
+    return fs.readFileSync(INFO_FILE, "utf8").trim();
+  } catch (err) {
+    return "information.txt not found";
+  }
+};
+
+const infoContent = readInfo();
+
 const server = http.createServer((req, res) => {
   if (req.method === "GET" && req.url === "/") {
     const timestamp = new Date().toISOString();
     const pongs = readCounter();
     res.statusCode = 200;
     res.setHeader("Content-Type", "text/plain");
-    res.end(`${timestamp}: ${uuid}.\nPing / Pongs: ${pongs}\n`);
+    res.end(`file content: ${infoContent}\nenv variable: MESSAGE=${MESSAGE}\n${timestamp}: ${uuid}.\nPing / Pongs: ${pongs}\n`);
   } else {
     res.statusCode = 404;
     res.setHeader("Content-Type", "text/plain");

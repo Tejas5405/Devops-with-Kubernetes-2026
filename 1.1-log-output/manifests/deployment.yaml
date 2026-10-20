@@ -17,6 +17,9 @@ spec:
         - name: course-storage
           persistentVolumeClaim:
             claimName: course-pvc
+        - name: config-volume
+          configMap:
+            name: log-output-config
       containers:
         - name: log-output
           image: log-output:1.11
@@ -24,11 +27,18 @@ spec:
           env:
             - name: PORT
               value: "3000"
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: log-output-config
+                  key: MESSAGE
           ports:
             - containerPort: 3000
           volumeMounts:
             - name: course-storage
               mountPath: /data
+            - name: config-volume
+              mountPath: /config
           securityContext:
             runAsUser: 0
             runAsGroup: 0

@@ -4,10 +4,11 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const PORT = parseInt(process.env.PORT, 10) || 3000;
-const CACHE_DIR = "/data/cache";
+const CACHE_DIR = process.env.CACHE_DIR || "/data/cache";
 const IMAGE_FILE = path.join(CACHE_DIR, "image.jpg");
 const META_FILE = path.join(CACHE_DIR, "meta.json");
-const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes
+const CACHE_TTL_MS = parseInt(process.env.CACHE_TTL_MS, 10) || 10 * 60 * 1000;
+const IMAGE_URL = process.env.IMAGE_URL || "https://picsum.photos/1200";
 
 fs.mkdirSync(CACHE_DIR, { recursive: true });
 
@@ -40,7 +41,7 @@ const fetchImage = (maxRedirects = 5) => {
         });
       }).on("error", reject);
     };
-    fetch("https://picsum.photos/1200", maxRedirects);
+    fetch(IMAGE_URL, maxRedirects);
   });
 };
 
