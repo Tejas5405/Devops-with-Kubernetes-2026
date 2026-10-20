@@ -68,6 +68,7 @@ spec:
                   key: PG_DATABASE
           ports:
             - containerPort: 3000
+              name: http
           readinessProbe:
             httpGet:
               path: /healthz

@@ -81,6 +81,10 @@ const server = http.createServer((req, res) => {
     res.statusCode = 404;
     res.setHeader("Content-Type", "text/plain");
     res.end("Not found\n");
+  } else if (req.method === "GET" && req.url === "/metrics") {
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "text/plain; version=0.0.4");
+    res.end(`# HELP pingpong_requests_total Total number of pingpong requests\n# TYPE pingpong_requests_total counter\npingpong_requests_total 1\n`);
   }
 });
 

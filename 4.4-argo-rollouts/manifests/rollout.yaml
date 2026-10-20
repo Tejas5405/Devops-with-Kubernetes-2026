@@ -1,0 +1,102 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: todo-app
+  namespace: project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause: {duration: 30s}
+        - setWeight: 50
+        - pause: {duration: 30s}
+        - setWeight: 100
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      volumes:
+        - name: image-cache
+          persistentVolumeClaim:
+            claimName: image-cache-pvc
+      containers:
+        - name: todo-app
+          image: PROJECT/IMAGE
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: "3000"
+            - name: CACHE_DIR
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-app-config
+                  key: CACHE_DIR
+            - name: CACHE_TTL_MS
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-app-config
+                  key: CACHE_TTL_MS
+            - name: IMAGE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-app-config
+                  key: IMAGE_URL
+            - name: PG_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-db-config
+                  key: PG_HOST
+            - name: PG_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-db-config
+                  key: PG_PORT
+            - name: PG_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-db-config
+                  key: PG_USER
+            - name: PG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: todo-db-secret
+                  key: PG_PASSWORD
+            - name: PG_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-db-config
+                  key: PG_DATABASE
+          ports:
+            - containerPort: 3000
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          volumeMounts:
+            - name: image-cache
+              mountPath: /data
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"

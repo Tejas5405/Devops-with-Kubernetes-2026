@@ -32,6 +32,7 @@ spec:
               value: "postgres"
           ports:
             - containerPort: 3000
+              name: http
           readinessProbe:
             httpGet:
               path: /healthz

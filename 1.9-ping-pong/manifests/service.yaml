@@ -8,6 +8,7 @@ spec:
   selector:
     app: ping-pong
   ports:
-    - port: 2346
+    - name: http
+      port: 2346
       protocol: TCP
       targetPort: 3000

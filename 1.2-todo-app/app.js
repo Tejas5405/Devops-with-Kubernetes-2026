@@ -219,6 +219,11 @@ ${todosHtml}
       res.setHeader("Content-Type", "application/json");
       res.end(JSON.stringify({ status: "unhealthy", dbReady, isHealthy }));
     }
+  } else if (req.method === "GET" && req.url === "/metrics") {
+    logRequest("GET", "/metrics");
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "text/plain; version=0.0.4");
+    res.end(`# HELP http_requests_total Total number of HTTP requests\n# TYPE http_requests_total counter\nhttp_requests_total 1\n# HELP todo_app_health Application health status (1=healthy, 0=unhealthy)\n# TYPE todo_app_health gauge\ntodo_app_health ${isHealthy ? 1 : 0}\n`);
   } else if (req.method === "PUT" && req.url.startsWith("/todos/")) {
     const id = req.url.split("/").pop();
     logRequest("POST", req.url);

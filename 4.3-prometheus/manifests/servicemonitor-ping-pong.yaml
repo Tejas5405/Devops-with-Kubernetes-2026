@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: ping-pong-monitor
+  namespace: exercises
+  labels:
+    release: prom
+spec:
+  selector:
+    matchLabels:
+      app: ping-pong
+  namespaceSelector:
+    matchNames:
+      - exercises
+  endpoints:
+  - port: http
+    interval: 15s
+    path: /metrics
