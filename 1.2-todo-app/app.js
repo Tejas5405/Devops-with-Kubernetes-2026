@@ -219,7 +219,7 @@ ${todosHtml}
       res.setHeader("Content-Type", "application/json");
       res.end(JSON.stringify({ status: "unhealthy", dbReady, isHealthy }));
     }
-  } else if (req.method === "POST" && req.url.startsWith("/todos/")) {
+  } else if (req.method === "PUT" && req.url.startsWith("/todos/")) {
     const id = req.url.split("/").pop();
     logRequest("POST", req.url);
     await markTodoDone(id);
