@@ -19,7 +19,7 @@ spec:
             claimName: image-cache-pvc
       containers:
         - name: todo-app
-          image: todo-app:1.14
+          image: todo-app:1.15
           imagePullPolicy: IfNotPresent
           env:
             - name: PORT

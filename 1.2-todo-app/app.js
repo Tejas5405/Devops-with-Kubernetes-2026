@@ -96,6 +96,8 @@ const getTodosHtml = async () => {
   }
 };
 
+const MAX_TODO_LENGTH = 140;
+
 const addTodo = async (text) => {
   try {
     await client.query(`INSERT INTO todos (text) VALUES ($1)`, [text]);
@@ -104,8 +106,14 @@ const addTodo = async (text) => {
   }
 };
 
+const logRequest = (method, url, detail = "") => {
+  const timestamp = new Date().toISOString();
+  console.log(`[${timestamp}] ${method} ${url} ${detail}`);
+};
+
 const server = http.createServer(async (req, res) => {
   if (req.method === "GET" && req.url === "/") {
+    logRequest("GET", "/");
     if (!isCacheValid()) {
       try {
         await fetchImage();
@@ -145,14 +153,29 @@ ${todosHtml}
     req.on("end", async () => {
       const params = new URLSearchParams(body);
       const todo = params.get("todo");
-      if (todo) {
-        await addTodo(todo);
+      logRequest("POST", "/", `todo="${todo || ""}"`);
+      if (!todo) {
+        res.statusCode = 400;
+        res.setHeader("Content-Type", "text/plain");
+        res.end("Todo text is required\n");
+        return;
       }
+      if (todo.length > MAX_TODO_LENGTH) {
+        console.error(
+          `[${new Date().toISOString()}] REJECTED todo too long (${todo.length} chars): "${todo.substring(0, 50)}..."`
+        );
+        res.statusCode = 400;
+        res.setHeader("Content-Type", "text/plain");
+        res.end(`Todo exceeds ${MAX_TODO_LENGTH} character limit\n`);
+        return;
+      }
+      await addTodo(todo);
       res.statusCode = 302;
       res.setHeader("Location", "/");
       res.end();
     });
   } else if (req.method === "GET" && req.url === "/image") {
+    logRequest("GET", "/image");
     try {
       const image = fs.readFileSync(IMAGE_FILE);
       res.statusCode = 200;
@@ -164,6 +187,7 @@ ${todosHtml}
       res.end("Image not found\n");
     }
   } else {
+    logRequest(req.method, req.url);
     res.statusCode = 404;
     res.setHeader("Content-Type", "text/plain");
     res.end("Not found\n");
