@@ -21,6 +21,8 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 | 1.13 — The project, step 7 | `1.2-todo-app/` + `storage/` | [Exercise 1.13 — The project, step 7](https://github.com/Tejas5405/K8/releases/tag/1.13) |
 | 2.3 — Keep them separated | `storage/` + `1.1-log-output/` + `1.9-ping-pong/` | [Exercise 2.3 — Keep them separated](https://github.com/Tejas5405/K8/releases/tag/2.3) |
 | 2.4 — The project, step 9 | `1.2-todo-app/` + `storage/` | [Exercise 2.4 — The project, step 9](https://github.com/Tejas5405/K8/releases/tag/2.4) |
+| 2.5 — Documentation and ConfigMaps | `1.1-log-output/` | [Exercise 2.5 — Documentation and ConfigMaps](https://github.com/Tejas5405/K8/releases/tag/2.5) |
+| 2.6 — The project, step 10 | `1.2-todo-app/` | [Exercise 2.6 — The project, step 10](https://github.com/Tejas5405/K8/releases/tag/2.6) |
 
 ## Submission
 
@@ -55,5 +57,9 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 - Exercise 2.3 directory at tag 2.3: https://github.com/Tejas5405/K8/tree/2.3/storage
 - Exercise 2.4 release: https://github.com/Tejas5405/K8/releases/tag/2.4
 - Exercise 2.4 directory at tag 2.4: https://github.com/Tejas5405/K8/tree/2.4/1.2-todo-app
+- Exercise 2.5 release: https://github.com/Tejas5405/K8/releases/tag/2.5
+- Exercise 2.5 directory at tag 2.5: https://github.com/Tejas5405/K8/tree/2.5/1.1-log-output
+- Exercise 2.6 release: https://github.com/Tejas5405/K8/releases/tag/2.6
+- Exercise 2.6 directory at tag 2.6: https://github.com/Tejas5405/K8/tree/2.6/1.2-todo-app
 
 Reviewer: mattiluukkainen
