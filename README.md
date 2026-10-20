@@ -31,6 +31,10 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 | 3.6 — The project, step 15 | `.github/` | [Exercise 3.6 — The project, step 15](https://github.com/Tejas5405/K8/releases/tag/3.6) |
 | 3.7 — The project, step 16 | `.github/` | [Exercise 3.7 — The project, step 16](https://github.com/Tejas5405/K8/releases/tag/3.7) |
 | 3.8 — The project, step 17 | `.github/` | [Exercise 3.8 — The project, step 17](https://github.com/Tejas5405/K8/releases/tag/3.8) |
+| 3.9 — DBaaS vs DIY | `README.md` | [Exercise 3.9 — DBaaS vs DIY](https://github.com/Tejas5405/K8/releases/tag/3.9) |
+| 3.10 — The project, step 18 | `.github/` | [Exercise 3.10 — The project, step 18](https://github.com/Tejas5405/K8/releases/tag/3.10) |
+| 3.11 — The project, step 19 | `1.2-todo-app/` | [Exercise 3.11 — The project, step 19](https://github.com/Tejas5405/K8/releases/tag/3.11) |
+| 3.12 — The project, step 20 | `.github/` | [Exercise 3.12 — The project, step 20](https://github.com/Tejas5405/K8/releases/tag/3.12) |
 
 ## Submission
 
@@ -85,6 +89,14 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 - Exercise 3.7 directory at tag 3.7: https://github.com/Tejas5405/K8/tree/3.7/.github
 - Exercise 3.8 release: https://github.com/Tejas5405/K8/releases/tag/3.8
 - Exercise 3.8 directory at tag 3.8: https://github.com/Tejas5405/K8/tree/3.8/.github
+- Exercise 3.9 release: https://github.com/Tejas5405/K8/releases/tag/3.9
+- Exercise 3.9 directory at tag 3.9: https://github.com/Tejas5405/K8/tree/3.9/README.md
+- Exercise 3.10 release: https://github.com/Tejas5405/K8/releases/tag/3.10
+- Exercise 3.10 directory at tag 3.10: https://github.com/Tejas5405/K8/tree/3.10/.github
+- Exercise 3.11 release: https://github.com/Tejas5405/K8/releases/tag/3.11
+- Exercise 3.11 directory at tag 3.11: https://github.com/Tejas5405/K8/tree/3.11/1.2-todo-app
+- Exercise 3.12 release: https://github.com/Tejas5405/K8/releases/tag/3.12
+- Exercise 3.12 directory at tag 3.12: https://github.com/Tejas5405/K8/tree/3.12/.github
 
 ## Exercise 3.9 — DBaaS vs DIY
 
