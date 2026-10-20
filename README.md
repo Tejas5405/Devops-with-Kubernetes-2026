@@ -26,6 +26,7 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 | 2.7 — Stateful applications | `1.9-ping-pong/` | [Exercise 2.7 — Stateful applications](https://github.com/Tejas5405/K8/releases/tag/2.7) |
 | 2.8 — The project, step 11 | `1.2-todo-app/` | [Exercise 2.8 — The project, step 11](https://github.com/Tejas5405/K8/releases/tag/2.8) |
 | 2.9 — The project, step 12 | `1.2-todo-app/` | [Exercise 2.9 — The project, step 12](https://github.com/Tejas5405/K8/releases/tag/2.9) |
+| 2.10 — The project, step 13 | `1.2-todo-app/` | [Exercise 2.10 — The project, step 13](https://github.com/Tejas5405/K8/releases/tag/2.10) |
 
 ## Submission
 
@@ -70,5 +71,7 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 - Exercise 2.8 directory at tag 2.8: https://github.com/Tejas5405/K8/tree/2.8/1.2-todo-app
 - Exercise 2.9 release: https://github.com/Tejas5405/K8/releases/tag/2.9
 - Exercise 2.9 directory at tag 2.9: https://github.com/Tejas5405/K8/tree/2.9/1.2-todo-app
+- Exercise 2.10 release: https://github.com/Tejas5405/K8/releases/tag/2.10
+- Exercise 2.10 directory at tag 2.10: https://github.com/Tejas5405/K8/tree/2.10/1.2-todo-app
 
 Reviewer: mattiluukkainen
