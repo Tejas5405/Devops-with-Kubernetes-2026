@@ -35,6 +35,8 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 | 3.10 — The project, step 18 | `.github/` | [Exercise 3.10 — The project, step 18](https://github.com/Tejas5405/K8/releases/tag/3.10) |
 | 3.11 — The project, step 19 | `1.2-todo-app/` | [Exercise 3.11 — The project, step 19](https://github.com/Tejas5405/K8/releases/tag/3.11) |
 | 3.12 — The project, step 20 | `.github/` | [Exercise 3.12 — The project, step 20](https://github.com/Tejas5405/K8/releases/tag/3.12) |
+| 4.1 — Readines probe | `1.9-ping-pong/` + `1.1-log-output/` | [Exercise 4.1 — Readines probe](https://github.com/Tejas5405/K8/releases/tag/4.1) |
+| 4.2 — The project, step 21 | `1.2-todo-app/` | [Exercise 4.2 — The project, step 21](https://github.com/Tejas5405/K8/releases/tag/4.2) |
 
 ## Submission
 
@@ -97,6 +99,10 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 - Exercise 3.11 directory at tag 3.11: https://github.com/Tejas5405/K8/tree/3.11/1.2-todo-app
 - Exercise 3.12 release: https://github.com/Tejas5405/K8/releases/tag/3.12
 - Exercise 3.12 directory at tag 3.12: https://github.com/Tejas5405/K8/tree/3.12/.github
+- Exercise 4.1 release: https://github.com/Tejas5405/K8/releases/tag/4.1
+- Exercise 4.1 directory at tag 4.1: https://github.com/Tejas5405/K8/tree/4.1/1.9-ping-pong
+- Exercise 4.2 release: https://github.com/Tejas5405/K8/releases/tag/4.2
+- Exercise 4.2 directory at tag 4.2: https://github.com/Tejas5405/K8/tree/4.2/1.2-todo-app
 
 ## Exercise 3.9 — DBaaS vs DIY
 
