@@ -13,22 +13,25 @@ spec:
       labels:
         app: ping-pong
     spec:
-      volumes:
-        - name: course-storage
-          persistentVolumeClaim:
-            claimName: course-pvc
       containers:
         - name: ping-pong
-          image: ping-pong:1.11
+          image: ping-pong:1.12
           imagePullPolicy: IfNotPresent
           env:
             - name: PORT
               value: "3000"
+            - name: PG_HOST
+              value: "postgres-svc.exercises.svc.cluster.local"
+            - name: PG_PORT
+              value: "5432"
+            - name: PG_USER
+              value: "postgres"
+            - name: PG_PASSWORD
+              value: "example"
+            - name: PG_DATABASE
+              value: "postgres"
           ports:
             - containerPort: 3000
-          volumeMounts:
-            - name: course-storage
-              mountPath: /data
           securityContext:
             runAsUser: 0
             runAsGroup: 0
