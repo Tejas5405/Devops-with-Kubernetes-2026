@@ -27,6 +27,10 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 | 2.8 — The project, step 11 | `1.2-todo-app/` | [Exercise 2.8 — The project, step 11](https://github.com/Tejas5405/K8/releases/tag/2.8) |
 | 2.9 — The project, step 12 | `1.2-todo-app/` | [Exercise 2.9 — The project, step 12](https://github.com/Tejas5405/K8/releases/tag/2.9) |
 | 2.10 — The project, step 13 | `1.2-todo-app/` | [Exercise 2.10 — The project, step 13](https://github.com/Tejas5405/K8/releases/tag/2.10) |
+| 3.5 — The project, step 14 | `1.2-todo-app/` | [Exercise 3.5 — The project, step 14](https://github.com/Tejas5405/K8/releases/tag/3.5) |
+| 3.6 — The project, step 15 | `.github/` | [Exercise 3.6 — The project, step 15](https://github.com/Tejas5405/K8/releases/tag/3.6) |
+| 3.7 — The project, step 16 | `.github/` | [Exercise 3.7 — The project, step 16](https://github.com/Tejas5405/K8/releases/tag/3.7) |
+| 3.8 — The project, step 17 | `.github/` | [Exercise 3.8 — The project, step 17](https://github.com/Tejas5405/K8/releases/tag/3.8) |
 
 ## Submission
 
@@ -73,5 +77,13 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 - Exercise 2.9 directory at tag 2.9: https://github.com/Tejas5405/K8/tree/2.9/1.2-todo-app
 - Exercise 2.10 release: https://github.com/Tejas5405/K8/releases/tag/2.10
 - Exercise 2.10 directory at tag 2.10: https://github.com/Tejas5405/K8/tree/2.10/1.2-todo-app
+- Exercise 3.5 release: https://github.com/Tejas5405/K8/releases/tag/3.5
+- Exercise 3.5 directory at tag 3.5: https://github.com/Tejas5405/K8/tree/3.5/1.2-todo-app
+- Exercise 3.6 release: https://github.com/Tejas5405/K8/releases/tag/3.6
+- Exercise 3.6 directory at tag 3.6: https://github.com/Tejas5405/K8/tree/3.6/.github
+- Exercise 3.7 release: https://github.com/Tejas5405/K8/releases/tag/3.7
+- Exercise 3.7 directory at tag 3.7: https://github.com/Tejas5405/K8/tree/3.7/.github
+- Exercise 3.8 release: https://github.com/Tejas5405/K8/releases/tag/3.8
+- Exercise 3.8 directory at tag 3.8: https://github.com/Tejas5405/K8/tree/3.8/.github
 
 Reviewer: mattiluukkainen
