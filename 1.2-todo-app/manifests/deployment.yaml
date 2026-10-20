@@ -5,6 +5,8 @@ metadata:
   namespace: project
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: todo-app
@@ -19,7 +21,7 @@ spec:
             claimName: image-cache-pvc
       containers:
         - name: todo-app
-          image: todo-app:1.15
+          image: PROJECT/IMAGE
           imagePullPolicy: IfNotPresent
           env:
             - name: PORT
