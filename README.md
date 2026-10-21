@@ -48,6 +48,9 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 | 4.9 — The project, step 25 | `4.9-environments/` | [Exercise 4.9 — The project, step 25](https://github.com/Tejas5405/K8/releases/tag/4.9) |
 | 4.10 — The project, the grande finale | `4.9-environments/` + separate config repo | [Exercise 4.10 — The project, the grande finale](https://github.com/Tejas5405/K8/releases/tag/4.10) |
 | 5.1 — DIY CRD & Controller | `5.1-crd-controller/` | [Exercise 5.1 — DIY CRD & Controller](https://github.com/Tejas5405/K8/releases/tag/5.1) |
+| 5.2 — Istio service mesh | `5.2-istio-service-mesh/` | [Exercise 5.2 — Istio service mesh](https://github.com/Tejas5405/K8/releases/tag/5.2) |
+| 5.3 — Log app service mesh edition | `5.3-log-service-mesh/` | [Exercise 5.3 — Log app service mesh edition](https://github.com/Tejas5405/K8/releases/tag/5.3) |
+| 5.4 — Wikipedia with init and sidecar | `5.4-wikipedia-sidecar/` | [Exercise 5.4 — Wikipedia with init and sidecar](https://github.com/Tejas5405/K8/releases/tag/5.4) |
 
 ## Submission
 
@@ -136,6 +139,12 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 - Exercise 4.10 directory at tag 4.10: https://github.com/Tejas5405/K8/tree/4.10/config-repo
 - Exercise 5.1 release: https://github.com/Tejas5405/K8/releases/tag/5.1
 - Exercise 5.1 directory at tag 5.1: https://github.com/Tejas5405/K8/tree/5.1/5.1-crd-controller
+- Exercise 5.2 release: https://github.com/Tejas5405/K8/releases/tag/5.2
+- Exercise 5.2 directory at tag 5.2: https://github.com/Tejas5405/K8/tree/5.2/5.2-istio-service-mesh
+- Exercise 5.3 release: https://github.com/Tejas5405/K8/releases/tag/5.3
+- Exercise 5.3 directory at tag 5.3: https://github.com/Tejas5405/K8/tree/5.3/5.3-log-service-mesh
+- Exercise 5.4 release: https://github.com/Tejas5405/K8/releases/tag/5.4
+- Exercise 5.4 directory at tag 5.4: https://github.com/Tejas5405/K8/tree/5.4/5.4-wikipedia-sidecar
 
 ## Exercise 3.9 — DBaaS vs DIY
 
