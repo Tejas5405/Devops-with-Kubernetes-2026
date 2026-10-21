@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-output-service-mesh
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-output-service-mesh
+  template:
+    metadata:
+      labels:
+        app: log-output-service-mesh
+    spec:
+      containers:
+        - name: log-output
+          image: log-output:1.12
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: "3000"
+            - name: MESSAGE
+              value: "hello world"
+            - name: PINGPONG_URL
+              value: "http://ping-pong-svc.exercises.svc.cluster.local:2346/pingpong"
+            - name: GREETER_URL
+              value: "http://greeter-svc.default.svc.cluster.local:3000/greet"
+          ports:
+            - containerPort: 3000

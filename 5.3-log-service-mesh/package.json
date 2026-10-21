@@ -1,0 +1,9 @@
+{
+  "name": "greeter",
+  "version": "1.0.0",
+  "description": "Greeter service for service mesh exercise",
+  "main": "greeter.js",
+  "scripts": {
+    "start": "node greeter.js"
+  }
+}
