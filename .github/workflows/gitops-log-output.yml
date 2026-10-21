@@ -1,0 +1,40 @@
+name: GitOps - Log Output
+
+on:
+  push:
+    paths:
+      - '1.1-log-output/**'
+
+jobs:
+  build-publish-release:
+    name: Build, Push and Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and publish backend
+        run: |-
+          docker build --tag "log-output:${{ github.sha }}" ./1.1-log-output
+          docker tag "log-output:${{ github.sha }}" "log-output:${{ github.sha }}"
+          docker push "log-output:${{ github.sha }}"
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v3
+
+      - name: Use right image
+        working-directory: ./1.1-log-output
+        run: kustomize edit set image log-output=log-output:${{ github.sha }}
+
+      - name: Commit kustomization.yaml to GitHub
+        uses: EndBug/add-and-commit@v10
+        with:
+          add: '1.1-log-output/kustomization.yaml'
+          message: 'chore: release log-output ${{ github.sha }}'
