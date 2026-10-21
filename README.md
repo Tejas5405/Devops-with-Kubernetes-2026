@@ -55,6 +55,7 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 | 5.6 — Knative serverless | `5.6-knative-serverless/` | [Exercise 5.6 — Knative serverless](https://github.com/Tejas5405/K8/releases/tag/5.6) |
 | 5.7 — Ping-pong on Knative | `5.7-pingpong-knative/` | [Exercise 5.7 — Ping-pong on Knative](https://github.com/Tejas5405/K8/releases/tag/5.7) |
 | 5.8 — CNCF Landscape | `5.8-cncf-landscape/` | [Exercise 5.8 — CNCF Landscape](https://github.com/Tejas5405/K8/releases/tag/5.8) |
+| 5.9 — The end | `5.9-the-end/` | [Exercise 5.9 — The end](https://github.com/Tejas5405/K8/releases/tag/5.9) |
 
 ## Submission
 
@@ -157,6 +158,8 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 - Exercise 5.7 directory at tag 5.7: https://github.com/Tejas5405/K8/tree/5.7/5.7-pingpong-knative
 - Exercise 5.8 release: https://github.com/Tejas5405/K8/releases/tag/5.8
 - Exercise 5.8 directory at tag 5.8: https://github.com/Tejas5405/K8/tree/5.8/5.8-cncf-landscape
+- Exercise 5.9 release: https://github.com/Tejas5405/K8/releases/tag/5.9
+- Exercise 5.9 directory at tag 5.9: https://github.com/Tejas5405/K8/tree/5.9/5.9-the-end
 
 ## Exercise 3.9 — DBaaS vs DIY
 
