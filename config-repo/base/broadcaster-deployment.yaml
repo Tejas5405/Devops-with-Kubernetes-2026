@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broadcaster
+  namespace: project
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: broadcaster
+  template:
+    metadata:
+      labels:
+        app: broadcaster
+    spec:
+      containers:
+        - name: broadcaster
+          image: broadcaster:1.0.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: "3000"
+            - name: NATS_URL
+              value: "nats://my-nats.nats.svc.cluster.local:4222"
+            - name: WEBHOOK_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: broadcaster-config
+                  key: WEBHOOK_URL
+          ports:
+            - containerPort: 3000
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "100m"
+              memory: "128Mi"

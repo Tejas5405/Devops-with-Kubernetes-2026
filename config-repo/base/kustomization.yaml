@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: project
+resources:
+  - todo-app-deployment.yaml
+  - todo-app-service.yaml
+  - todo-app-configmap.yaml
+  - todo-app-db-configmap.yaml
+  - todo-app-db-secret.yaml
+  - todo-app-postgres-service.yaml
+  - todo-app-postgres-statefulset.yaml
+  - broadcaster-deployment.yaml
+  - broadcaster-service.yaml
+  - broadcaster-configmap.yaml
+images:
+  - name: PROJECT/IMAGE
+    newName: todo-app
+    newTag: "1.16"
+  - name: broadcaster:1.0.0
+    newName: broadcaster
+    newTag: "1.0.0"
