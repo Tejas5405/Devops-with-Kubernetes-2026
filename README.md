@@ -40,6 +40,7 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 | 4.3 — Prometheus monitoring | `4.3-prometheus/` | [Exercise 4.3 — Prometheus monitoring](https://github.com/Tejas5405/K8/releases/tag/4.3) |
 | 4.4 — Argo Rollouts | `4.4-argo-rollouts/` | [Exercise 4.4 — Argo Rollouts](https://github.com/Tejas5405/K8/releases/tag/4.4) |
 | 4.5 — The project, step 22 | `1.2-todo-app/` | [Exercise 4.5 — The project, step 22](https://github.com/Tejas5405/K8/releases/tag/4.5) |
+| 4.6 — Messaging systems | `4.6-messaging/` + `1.2-todo-app/` | [Exercise 4.6 — Messaging systems](https://github.com/Tejas5405/K8/releases/tag/4.6) |
 
 ## Submission
 
@@ -112,6 +113,8 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 - Exercise 4.4 directory at tag 4.4: https://github.com/Tejas5405/K8/tree/4.4/4.4-argo-rollouts
 - Exercise 4.5 release: https://github.com/Tejas5405/K8/releases/tag/4.5
 - Exercise 4.5 directory at tag 4.5: https://github.com/Tejas5405/K8/tree/4.5/1.2-todo-app
+- Exercise 4.6 release: https://github.com/Tejas5405/K8/releases/tag/4.6
+- Exercise 4.6 directory at tag 4.6: https://github.com/Tejas5405/K8/tree/4.6/4.6-messaging
 
 ## Exercise 3.9 — DBaaS vs DIY
 

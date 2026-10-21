@@ -1,0 +1,12 @@
+{
+  "name": "broadcaster",
+  "version": "1.0.0",
+  "description": "NATS subscriber that forwards todo events to a webhook",
+  "main": "broadcaster.js",
+  "scripts": {
+    "start": "node broadcaster.js"
+  },
+  "dependencies": {
+    "nats": "^2.29.0"
+  }
+}

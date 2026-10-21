@@ -3,6 +3,7 @@ const https = require("node:https");
 const fs = require("node:fs");
 const path = require("node:path");
 const { Client } = require("pg");
+const { connect, StringCodec } = require("nats");
 
 const PORT = parseInt(process.env.PORT, 10) || 3000;
 const CACHE_DIR = process.env.CACHE_DIR || "/data/cache";
@@ -16,6 +17,35 @@ const PG_PORT = parseInt(process.env.PG_PORT, 10) || 5432;
 const PG_USER = process.env.PG_USER || "postgres";
 const PG_PASSWORD = process.env.PG_PASSWORD || "example";
 const PG_DATABASE = process.env.PG_DATABASE || "postgres";
+
+const NATS_URL = process.env.NATS_URL || "nats://my-nats.nats.svc.cluster.local:4222";
+const NATS_SUBJECT = "todos";
+
+let nc = null;
+const sc = StringCodec();
+
+const connectNATS = async () => {
+  while (true) {
+    try {
+      nc = await connect({ servers: NATS_URL });
+      console.log("Connected to NATS");
+      break;
+    } catch (err) {
+      console.error("NATS connection failed, retrying in 2s...", err.message);
+      await new Promise((r) => setTimeout(r, 2000));
+    }
+  }
+};
+
+const publishTodoEvent = async (action, payload) => {
+  if (!nc || nc.isClosed()) return;
+  try {
+    const message = JSON.stringify({ action, ...payload, ts: new Date().toISOString() });
+    await nc.publish(NATS_SUBJECT, sc.encode(message));
+  } catch (err) {
+    console.error("Failed to publish NATS message:", err.message);
+  }
+};
 
 fs.mkdirSync(CACHE_DIR, { recursive: true });
 
@@ -59,6 +89,7 @@ const connectWithRetry = async () => {
 };
 
 connectWithRetry();
+connectNATS();
 
 const isCacheValid = () => {
   try {
@@ -108,6 +139,7 @@ const getTodosHtml = async () => {
 const addTodo = async (text) => {
   try {
     await client.query(`INSERT INTO todos (text) VALUES ($1)`, [text]);
+    await publishTodoEvent("created", { text });
   } catch (err) {
     console.error("Error adding todo:", err.message);
   }
@@ -116,6 +148,7 @@ const addTodo = async (text) => {
 const markTodoDone = async (id) => {
   try {
     await client.query(`UPDATE todos SET text = CONCAT('[DONE] ', text) WHERE id = $1`, [id]);
+    await publishTodoEvent("updated", { id });
   } catch (err) {
     console.error("Error marking todo done:", err.message);
   }

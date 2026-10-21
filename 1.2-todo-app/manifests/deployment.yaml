@@ -66,6 +66,8 @@ spec:
                 configMapKeyRef:
                   name: todo-db-config
                   key: PG_DATABASE
+            - name: NATS_URL
+              value: "nats://my-nats.nats.svc.cluster.local:4222"
           ports:
             - containerPort: 3000
               name: http
