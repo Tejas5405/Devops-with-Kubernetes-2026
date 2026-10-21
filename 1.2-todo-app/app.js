@@ -12,11 +12,7 @@ const META_FILE = path.join(CACHE_DIR, "meta.json");
 const CACHE_TTL_MS = parseInt(process.env.CACHE_TTL_MS, 10) || 10 * 60 * 1000;
 const IMAGE_URL = process.env.IMAGE_URL || "https://picsum.photos/1200";
 
-const PG_HOST = process.env.PG_HOST || "postgres-svc.project.svc.cluster.local";
-const PG_PORT = parseInt(process.env.PG_PORT, 10) || 5432;
-const PG_USER = process.env.PG_USER || "postgres";
-const PG_PASSWORD = process.env.PG_PASSWORD || "example";
-const PG_DATABASE = process.env.PG_DATABASE || "postgres";
+const TODO_BACKEND_URL = process.env.TODO_BACKEND_URL || "http://todo-backend-svc.project.svc.cluster.local:3000/todos";
 
 const NATS_URL = process.env.NATS_URL || "nats://my-nats.nats.svc.cluster.local:4222";
 const NATS_SUBJECT = "todos";
@@ -51,44 +47,82 @@ fs.mkdirSync(CACHE_DIR, { recursive: true });
 
 const MAX_TODO_LENGTH = 140;
 let isHealthy = true;
-let dbReady = false;
-let client = null;
 
-const createClient = () => {
-  return new Client({
-    host: PG_HOST,
-    port: PG_PORT,
-    user: PG_USER,
-    password: PG_PASSWORD,
-    database: PG_DATABASE,
-  });
-};
-
-const connectWithRetry = async () => {
-  while (!dbReady) {
-    client = createClient();
+const connectNATS = async () => {
+  while (true) {
     try {
-      await client.connect();
-      dbReady = true;
-      await client.query(`
-        CREATE TABLE IF NOT EXISTS todos (
-          id SERIAL PRIMARY KEY,
-          text TEXT NOT NULL,
-          created_at TIMESTAMP DEFAULT NOW()
-        )
-      `);
-      console.log("Connected to Postgres and initialized todos table");
+      nc = await connect({ servers: NATS_URL });
+      console.log("Connected to NATS");
+      break;
     } catch (err) {
-      console.error("Postgres connection failed, retrying in 2s...", err.message);
-      try {
-        await client.end();
-      } catch (_) {}
+      console.error("NATS connection failed, retrying in 2s...", err.message);
       await new Promise((r) => setTimeout(r, 2000));
     }
   }
 };
 
-connectWithRetry();
+const publishTodoEvent = async (action, payload) => {
+  if (!nc || nc.isClosed()) return;
+  try {
+    const message = JSON.stringify({ action, ...payload, ts: new Date().toISOString() });
+    await nc.publish(NATS_SUBJECT, sc.encode(message));
+  } catch (err) {
+    console.error("Failed to publish NATS message:", err.message);
+  }
+};
+
+const fetchTodos = async () => {
+  try {
+    const resp = await httpGet(TODO_BACKEND_URL);
+    const todos = JSON.parse(resp);
+    return todos.map((t) => `<li>${t.text} <form method="POST" action="/todos/${t.id}" style="display:inline;"><button type="submit">Done</button></form></li>`).join("");
+  } catch (err) {
+    console.error("Error fetching todos:", err.message);
+    return "<li>Error loading todos.</li>";
+  }
+};
+
+const httpGet = (url) => {
+  return new Promise((resolve, reject) => {
+    http.get(url, (res) => {
+      let data = "";
+      res.on("data", (chunk) => { data += chunk; });
+      res.on("end", () => resolve(data));
+    }).on("error", reject);
+  });
+};
+
+const addTodo = async (text) => {
+  try {
+    const body = JSON.stringify({ text });
+    await httpPost(TODO_BACKEND_URL, body);
+    await publishTodoEvent("created", { text });
+  } catch (err) {
+    console.error("Error adding todo:", err.message);
+  }
+};
+
+const httpPost = (url, body) => {
+  return new Promise((resolve, reject) => {
+    const parsed = new URL(url);
+    const options = {
+      hostname: parsed.hostname,
+      port: parsed.port || 3000,
+      path: parsed.pathname,
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    };
+    const req = http.request(options, (res) => {
+      let data = "";
+      res.on("data", (chunk) => { data += chunk; });
+      res.on("end", () => resolve(data));
+    });
+    req.on("error", reject);
+    req.write(body);
+    req.end();
+  });
+};
+
 connectNATS();
 
 const isCacheValid = () => {
@@ -125,32 +159,16 @@ const fetchImage = (maxRedirects = 5) => {
 };
 
 const getTodosHtml = async () => {
-  try {
-    const result = await client.query(
-      `SELECT id, text FROM todos ORDER BY created_at DESC`
-    );
-    const todos = result.rows.map((row) => `<li>${row.text} <form method="POST" action="/todos/${row.id}" style="display:inline;"><button type="submit">Done</button></form></li>`).join("");
-    return todos || "<li>No todos yet.</li>";
-  } catch (err) {
-    return "<li>Error loading todos.</li>";
-  }
+  return await fetchTodos();
 };
 
 const addTodo = async (text) => {
   try {
-    await client.query(`INSERT INTO todos (text) VALUES ($1)`, [text]);
+    const body = JSON.stringify({ text });
+    await httpPost(TODO_BACKEND_URL, body);
     await publishTodoEvent("created", { text });
   } catch (err) {
     console.error("Error adding todo:", err.message);
-  }
-};
-
-const markTodoDone = async (id) => {
-  try {
-    await client.query(`UPDATE todos SET text = CONCAT('[DONE] ', text) WHERE id = $1`, [id]);
-    await publishTodoEvent("updated", { id });
-  } catch (err) {
-    console.error("Error marking todo done:", err.message);
   }
 };
 
@@ -259,8 +277,7 @@ ${todosHtml}
     res.end(`# HELP http_requests_total Total number of HTTP requests\n# TYPE http_requests_total counter\nhttp_requests_total 1\n# HELP todo_app_health Application health status (1=healthy, 0=unhealthy)\n# TYPE todo_app_health gauge\ntodo_app_health ${isHealthy ? 1 : 0}\n`);
   } else if (req.method === "PUT" && req.url.startsWith("/todos/")) {
     const id = req.url.split("/").pop();
-    logRequest("POST", req.url);
-    await markTodoDone(id);
+    logRequest("PUT", req.url);
     res.statusCode = 302;
     res.setHeader("Location", "/");
     res.end();

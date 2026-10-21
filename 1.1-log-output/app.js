@@ -4,7 +4,6 @@ const fs = require("node:fs");
 
 const LOG_INTERVAL_MS = 5000;
 const HTTP_PORT = parseInt(process.env.PORT, 10) || 3000;
-const COUNTER_FILE = "/data/counter.txt";
 const INFO_FILE = "/config/information.txt";
 const MESSAGE = process.env.MESSAGE || "not set";
 const PINGPONG_URL = process.env.PINGPONG_URL || "http://ping-pong-svc.exercises.svc.cluster.local:2346/pingpong";
@@ -41,36 +40,38 @@ const readInfo = () => {
 
 const infoContent = readInfo();
 
-let pingpongReady = false;
+let pingpongCount = 0;
 
-const checkPingPong = () => {
+const fetchPongCount = () => {
   http.get(PINGPONG_URL, (res) => {
-    pingpongReady = res.statusCode === 200;
+    let data = "";
+    res.on("data", (chunk) => {
+      data += chunk;
+    });
+    res.on("end", () => {
+      const match = data.match(/pong\s+(\d+)/);
+      if (match) {
+        pingpongCount = parseInt(match[1], 10);
+      }
+    });
   }).on("error", () => {
-    pingpongReady = false;
+    // keep previous count on error
   });
 };
 
-setInterval(checkPingPong, 5000);
-checkPingPong();
+setInterval(fetchPongCount, 5000);
+fetchPongCount();
 
 const server = http.createServer((req, res) => {
   if (req.method === "GET" && req.url === "/") {
     const timestamp = new Date().toISOString();
-    const pongs = readCounter();
     res.statusCode = 200;
     res.setHeader("Content-Type", "text/plain");
-    res.end(`file content: ${infoContent}\nenv variable: MESSAGE=${MESSAGE}\n${timestamp}: ${uuid}.\nPing / Pongs: ${pongs}\n`);
+    res.end(`file content: ${infoContent}\nenv variable: MESSAGE=${MESSAGE}\n${timestamp}: ${uuid}.\nPing / Pongs: ${pingpongCount}\n`);
   } else if (req.method === "GET" && req.url === "/healthz") {
-    if (pingpongReady) {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "text/plain");
-      res.end("ok\n");
-    } else {
-      res.statusCode = 503;
-      res.setHeader("Content-Type", "text/plain");
-      res.end("pingpong not reachable\n");
-    }
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "text/plain");
+    res.end("ok\n");
   } else {
     res.statusCode = 404;
     res.setHeader("Content-Type", "text/plain");

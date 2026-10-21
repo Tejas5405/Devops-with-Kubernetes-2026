@@ -13,13 +13,6 @@ spec:
       labels:
         app: log-output
     spec:
-      volumes:
-        - name: course-storage
-          persistentVolumeClaim:
-            claimName: course-pvc
-        - name: config-volume
-          configMap:
-            name: log-output-config
       containers:
         - name: log-output
           image: log-output:1.12
@@ -43,8 +36,6 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
           volumeMounts:
-            - name: course-storage
-              mountPath: /data
             - name: config-volume
               mountPath: /config
           securityContext:

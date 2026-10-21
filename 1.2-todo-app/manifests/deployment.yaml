@@ -41,31 +41,8 @@ spec:
                 configMapKeyRef:
                   name: todo-app-config
                   key: IMAGE_URL
-            - name: PG_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: todo-db-config
-                  key: PG_HOST
-            - name: PG_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: todo-db-config
-                  key: PG_PORT
-            - name: PG_USER
-              valueFrom:
-                configMapKeyRef:
-                  name: todo-db-config
-                  key: PG_USER
-            - name: PG_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: todo-db-secret
-                  key: PG_PASSWORD
-            - name: PG_DATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: todo-db-config
-                  key: PG_DATABASE
+            - name: TODO_BACKEND_URL
+              value: "http://todo-backend-svc.project.svc.cluster.local:3000/todos"
             - name: NATS_URL
               value: "nats://my-nats.nats.svc.cluster.local:4222"
           ports:

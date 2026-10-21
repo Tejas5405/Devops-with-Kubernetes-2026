@@ -1,0 +1,9 @@
+{
+  "name": "todo-backend",
+  "version": "1.0.0",
+  "description": "Todo backend service with in-memory storage",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  }
+}

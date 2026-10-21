@@ -19,6 +19,8 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 | 1.11 — Persisting data | `storage/` + `1.1-log-output/` + `1.9-ping-pong/` | [Exercise 1.11 — Persisting data](https://github.com/Tejas5405/K8/releases/tag/1.11) |
 | 1.12 — The project, step 6 | `1.2-todo-app/` + `storage/` | [Exercise 1.12 — The project, step 6](https://github.com/Tejas5405/K8/releases/tag/1.12) |
 | 1.13 — The project, step 7 | `1.2-todo-app/` + `storage/` | [Exercise 1.13 — The project, step 7](https://github.com/Tejas5405/K8/releases/tag/1.13) |
+| 2.1 — Connecting pods | `1.1-log-output/` + `1.9-ping-pong/` | [Exercise 2.1 — Connecting pods](https://github.com/Tejas5405/K8/releases/tag/2.1) |
+| 2.2 — The project, step 8 | `1.2-todo-app/` + `2.2-todo-backend/` | [Exercise 2.2 — The project, step 8](https://github.com/Tejas5405/K8/releases/tag/2.2) |
 | 2.3 — Keep them separated | `storage/` + `1.1-log-output/` + `1.9-ping-pong/` | [Exercise 2.3 — Keep them separated](https://github.com/Tejas5405/K8/releases/tag/2.3) |
 | 2.4 — The project, step 9 | `1.2-todo-app/` + `storage/` | [Exercise 2.4 — The project, step 9](https://github.com/Tejas5405/K8/releases/tag/2.4) |
 | 2.5 — Documentation and ConfigMaps | `1.1-log-output/` | [Exercise 2.5 — Documentation and ConfigMaps](https://github.com/Tejas5405/K8/releases/tag/2.5) |
@@ -75,6 +77,10 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 - Exercise 1.12 directory at tag 1.12: https://github.com/Tejas5405/K8/tree/1.12/1.2-todo-app
 - Exercise 1.13 release: https://github.com/Tejas5405/K8/releases/tag/1.13
 - Exercise 1.13 directory at tag 1.13: https://github.com/Tejas5405/K8/tree/1.13/1.2-todo-app
+- Exercise 2.1 release: https://github.com/Tejas5405/K8/releases/tag/2.1
+- Exercise 2.1 directory at tag 2.1: https://github.com/Tejas5405/K8/tree/2.1/1.1-log-output
+- Exercise 2.2 release: https://github.com/Tejas5405/K8/releases/tag/2.2
+- Exercise 2.2 directory at tag 2.2: https://github.com/Tejas5405/K8/tree/2.2/1.2-todo-app
 - Exercise 2.3 release: https://github.com/Tejas5405/K8/releases/tag/2.3
 - Exercise 2.3 directory at tag 2.3: https://github.com/Tejas5405/K8/tree/2.3/storage
 - Exercise 2.4 release: https://github.com/Tejas5405/K8/releases/tag/2.4

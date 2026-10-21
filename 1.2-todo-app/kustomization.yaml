@@ -6,10 +6,11 @@ resources:
   - manifests/deployment.yaml
   - manifests/configmap.yaml
   - manifests/cronjob.yaml
-  - manifests/db-configmap.yaml
-  - manifests/db-secret.yaml
-  - manifests/postgres-service.yaml
-  - manifests/postgres-statefulset.yaml
+  - ../2.2-todo-backend/manifests/deployment.yaml
+  - ../2.2-todo-backend/manifests/service.yaml
 images:
   - name: PROJECT/IMAGE
-    newName: todo-app:1.16
+    newName: todo-app:1.17
+  - name: todo-backend:1.0.0
+    newName: todo-backend
+    newTag: "1.0.0"
