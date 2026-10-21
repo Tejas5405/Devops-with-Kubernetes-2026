@@ -1,0 +1,27 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: ping-pong
+  namespace: exercises
+spec:
+  template:
+    spec:
+      containers:
+        - image: ping-pong:1.14
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: "3000"
+            - name: PG_HOST
+              value: "postgres-svc.exercises.svc.cluster.local"
+            - name: PG_PORT
+              value: "5432"
+            - name: PG_USER
+              value: "postgres"
+            - name: PG_PASSWORD
+              value: "example"
+            - name: PG_DATABASE
+              value: "postgres"
+          ports:
+            - containerPort: 3000
+              name: http
