@@ -5,11 +5,12 @@ const PORT = parseInt(process.env.PORT, 10) || 3000;
 const NATS_URL = process.env.NATS_URL || "nats://my-nats.nats.svc.cluster.local:4222";
 const NATS_SUBJECT = "todos";
 const QUEUE_GROUP = "broadcaster";
-const WEBHOOK_URL = process.env.WEBHOOK_URL || "https://httpbin.org/post";
+const WEBHOOK_URL = process.env.WEBHOOK_URL;
+const LOG_ONLY = !WEBHOOK_URL;
 
 let nc = null;
 const sc = StringCodec();
-let webhookHealthy = false;
+let webhookHealthy = !LOG_ONLY;
 
 const connectNATS = async () => {
   while (true) {
@@ -25,6 +26,10 @@ const connectNATS = async () => {
 };
 
 const checkWebhookHealth = async () => {
+  if (LOG_ONLY) {
+    webhookHealthy = true;
+    return;
+  }
   try {
     const resp = await fetchWebhook(WEBHOOK_URL, { method: "GET" }, null);
     webhookHealthy = resp.ok;
@@ -57,6 +62,10 @@ const fetchWebhook = (url, options, body) => {
 };
 
 const forwardToWebhook = async (message) => {
+  if (LOG_ONLY) {
+    console.log(`[LOG-ONLY] Would forward to webhook: ${JSON.stringify(message)}`);
+    return true;
+  }
   if (!webhookHealthy) {
     console.log("Webhook not healthy, skipping forward");
     return false;
@@ -82,7 +91,7 @@ const server = http.createServer(async (req, res) => {
   if (req.url === "/healthz") {
     res.statusCode = (nc && !nc.isClosed() && webhookHealthy) ? 200 : 503;
     res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify({ status: webhookHealthy && nc && !nc.isClosed() ? "ok" : "unhealthy", nats: nc && !nc.isClosed(), webhook: webhookHealthy }));
+    res.end(JSON.stringify({ status: webhookHealthy && nc && !nc.isClosed() ? "ok" : "unhealthy", nats: nc && !nc.isClosed(), webhook: webhookHealthy, logOnly: LOG_ONLY }));
   } else {
     res.statusCode = 404;
     res.end("Not found\n");

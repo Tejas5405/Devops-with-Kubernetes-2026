@@ -1,0 +1,93 @@
+name: GitOps - Staging and Production
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '1.2-todo-app/**'
+      - '4.6-messaging/**'
+      - '4.9-environments/**'
+  tags:
+    - '4.9*'
+
+jobs:
+  build-publish-release-staging:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    name: Build, Push and Release Staging
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and publish todo-app
+        run: |-
+          docker build --tag "todo-app:${{ github.sha }}" ./1.2-todo-app
+          docker push "todo-app:${{ github.sha }}"
+
+      - name: Build and publish broadcaster
+        run: |-
+          docker build --tag "broadcaster:${{ github.sha }}" ./4.6-messaging
+          docker push "broadcaster:${{ github.sha }}"
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v3
+
+      - name: Use right images for staging
+        working-directory: ./4.9-environments/overlays/staging
+        run: |-
+          kustomize edit set image PROJECT/IMAGE=todo-app:${{ github.sha }}
+          kustomize edit set image broadcaster=broadcaster:${{ github.sha }}
+
+      - name: Commit staging kustomization to GitHub
+        uses: EndBug/add-and-commit@v10
+        with:
+          add: '4.9-environments/overlays/staging/kustomization.yaml'
+          message: 'chore: release staging ${{ github.sha }}'
+
+  build-publish-release-production:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+    name: Build, Push and Release Production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and publish todo-app
+        run: |-
+          docker build --tag "todo-app:${{ github.sha }}" ./1.2-todo-app
+          docker push "todo-app:${{ github.sha }}"
+
+      - name: Build and publish broadcaster
+        run: |-
+          docker build --tag "broadcaster:${{ github.sha }}" ./4.6-messaging
+          docker push "broadcaster:${{ github.sha }}"
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v3
+
+      - name: Use right images for production
+        working-directory: ./4.9-environments/overlays/production
+        run: |-
+          kustomize edit set image PROJECT/IMAGE=todo-app:${{ github.sha }}
+          kustomize edit set image broadcaster=broadcaster:${{ github.sha }}
+
+      - name: Commit production kustomization to GitHub
+        uses: EndBug/add-and-commit@v10
+        with:
+          add: '4.9-environments/overlays/production/kustomization.yaml'
+          message: 'chore: release production ${{ github.sha }}'

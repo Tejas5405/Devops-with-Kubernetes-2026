@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: random-todo-cronjob
+  namespace: production
+spec:
+  schedule: "0 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cronjob
+            image: curlimages/curl:8.10.0
+            resources:
+              requests:
+                cpu: "50m"
+                memory: "64Mi"
+              limits:
+                cpu: "100m"
+                memory: "128Mi"
+            command:
+            - /bin/sh
+            - -c
+            - |
+              URL=$(curl -sL -o /dev/null -w "%{url_effective}" https://en.wikipedia.org/wiki/Special:Random)
+              curl -s -X POST --data-urlencode "todo=Read $URL" http://todo-app-svc.production.svc.cluster.local:2345/
+          restartPolicy: Never

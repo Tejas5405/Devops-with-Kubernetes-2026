@@ -43,6 +43,8 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 | 4.6 — Messaging systems | `4.6-messaging/` + `1.2-todo-app/` | [Exercise 4.6 — Messaging systems](https://github.com/Tejas5405/K8/releases/tag/4.6) |
 | 4.7 — Baby steps to GitOps | `1.1-log-output/` | [Exercise 4.7 — Baby steps to GitOps](https://github.com/Tejas5405/K8/releases/tag/4.7) |
 | 4.8 — The project, step 24 | `.` | [Exercise 4.8 — The project, step 24](https://github.com/Tejas5405/K8/releases/tag/4.8) |
+| 4.9 — The project, step 25 | `4.9-environments/` | [Exercise 4.9 — The project, step 25](https://github.com/Tejas5405/K8/releases/tag/4.9) |
+| 4.10 — The project, the grande finale | `4.9-environments/` + separate config repo | [Exercise 4.10 — The project, the grande finale](https://github.com/Tejas5405/K8/releases/tag/4.10) |
 
 ## Submission
 
@@ -121,6 +123,10 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 - Exercise 4.7 directory at tag 4.7: https://github.com/Tejas5405/K8/tree/4.7/1.1-log-output
 - Exercise 4.8 release: https://github.com/Tejas5405/K8/releases/tag/4.8
 - Exercise 4.8 directory at tag 4.8: https://github.com/Tejas5405/K8/tree/4.8
+- Exercise 4.9 release: https://github.com/Tejas5405/K8/releases/tag/4.9
+- Exercise 4.9 directory at tag 4.9: https://github.com/Tejas5405/K8/tree/4.9/4.9-environments
+- Exercise 4.10 release: https://github.com/Tejas5405/K8/releases/tag/4.10
+- Exercise 4.10 directory at tag 4.10: https://github.com/Tejas5405/K8/tree/4.10/4.9-environments
 
 ## Exercise 3.9 — DBaaS vs DIY
 
