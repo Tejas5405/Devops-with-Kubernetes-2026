@@ -51,6 +51,10 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 | 5.2 — Istio service mesh | `5.2-istio-service-mesh/` | [Exercise 5.2 — Istio service mesh](https://github.com/Tejas5405/K8/releases/tag/5.2) |
 | 5.3 — Log app service mesh edition | `5.3-log-service-mesh/` | [Exercise 5.3 — Log app service mesh edition](https://github.com/Tejas5405/K8/releases/tag/5.3) |
 | 5.4 — Wikipedia with init and sidecar | `5.4-wikipedia-sidecar/` | [Exercise 5.4 — Wikipedia with init and sidecar](https://github.com/Tejas5405/K8/releases/tag/5.4) |
+| 5.5 — Platform comparison | `5.5-platform-comparison/` | [Exercise 5.5 — Platform comparison](https://github.com/Tejas5405/K8/releases/tag/5.5) |
+| 5.6 — Knative serverless | `5.6-knative-serverless/` | [Exercise 5.6 — Knative serverless](https://github.com/Tejas5405/K8/releases/tag/5.6) |
+| 5.7 — Ping-pong on Knative | `5.7-pingpong-knative/` | [Exercise 5.7 — Ping-pong on Knative](https://github.com/Tejas5405/K8/releases/tag/5.7) |
+| 5.8 — CNCF Landscape | `5.8-cncf-landscape/` | [Exercise 5.8 — CNCF Landscape](https://github.com/Tejas5405/K8/releases/tag/5.8) |
 
 ## Submission
 
@@ -145,6 +149,14 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 - Exercise 5.3 directory at tag 5.3: https://github.com/Tejas5405/K8/tree/5.3/5.3-log-service-mesh
 - Exercise 5.4 release: https://github.com/Tejas5405/K8/releases/tag/5.4
 - Exercise 5.4 directory at tag 5.4: https://github.com/Tejas5405/K8/tree/5.4/5.4-wikipedia-sidecar
+- Exercise 5.5 release: https://github.com/Tejas5405/K8/releases/tag/5.5
+- Exercise 5.5 directory at tag 5.5: https://github.com/Tejas5405/K8/tree/5.5/5.5-platform-comparison
+- Exercise 5.6 release: https://github.com/Tejas5405/K8/releases/tag/5.6
+- Exercise 5.6 directory at tag 5.6: https://github.com/Tejas5405/K8/tree/5.6/5.6-knative-serverless
+- Exercise 5.7 release: https://github.com/Tejas5405/K8/releases/tag/5.7
+- Exercise 5.7 directory at tag 5.7: https://github.com/Tejas5405/K8/tree/5.7/5.7-pingpong-knative
+- Exercise 5.8 release: https://github.com/Tejas5405/K8/releases/tag/5.8
+- Exercise 5.8 directory at tag 5.8: https://github.com/Tejas5405/K8/tree/5.8/5.8-cncf-landscape
 
 ## Exercise 3.9 — DBaaS vs DIY
 
