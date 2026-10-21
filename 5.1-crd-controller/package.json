@@ -1,0 +1,9 @@
+{
+  "name": "dummysite-controller",
+  "version": "1.0.0",
+  "description": "Controller for DummySite CRD that mirrors websites",
+  "main": "controller.js",
+  "scripts": {
+    "start": "node controller.js"
+  }
+}

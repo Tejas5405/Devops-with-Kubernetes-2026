@@ -47,6 +47,7 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 | 4.8 — The project, step 24 | `.` | [Exercise 4.8 — The project, step 24](https://github.com/Tejas5405/K8/releases/tag/4.8) |
 | 4.9 — The project, step 25 | `4.9-environments/` | [Exercise 4.9 — The project, step 25](https://github.com/Tejas5405/K8/releases/tag/4.9) |
 | 4.10 — The project, the grande finale | `4.9-environments/` + separate config repo | [Exercise 4.10 — The project, the grande finale](https://github.com/Tejas5405/K8/releases/tag/4.10) |
+| 5.1 — DIY CRD & Controller | `5.1-crd-controller/` | [Exercise 5.1 — DIY CRD & Controller](https://github.com/Tejas5405/K8/releases/tag/5.1) |
 
 ## Submission
 
@@ -132,7 +133,9 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 - Exercise 4.9 release: https://github.com/Tejas5405/K8/releases/tag/4.9
 - Exercise 4.9 directory at tag 4.9: https://github.com/Tejas5405/K8/tree/4.9/4.9-environments
 - Exercise 4.10 release: https://github.com/Tejas5405/K8/releases/tag/4.10
-- Exercise 4.10 directory at tag 4.10: https://github.com/Tejas5405/K8/tree/4.10/4.9-environments
+- Exercise 4.10 directory at tag 4.10: https://github.com/Tejas5405/K8/tree/4.10/config-repo
+- Exercise 5.1 release: https://github.com/Tejas5405/K8/releases/tag/5.1
+- Exercise 5.1 directory at tag 5.1: https://github.com/Tejas5405/K8/tree/5.1/5.1-crd-controller
 
 ## Exercise 3.9 — DBaaS vs DIY
 
