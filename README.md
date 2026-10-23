@@ -1,6 +1,23 @@
 # DevOps with Kubernetes 2026
 
-Course submission repository for the University of Helsinki DevOps with Kubernetes 2026 course.
+Course submission repository for the [University of Helsinki DevOps with Kubernetes 2026](https://devopswithkubernetes.com/) course.
+
+## Technologies Used
+
+`Kubernetes` `k3d` `k3s` `Docker` `Helm` `Nginx Ingress` `PostgreSQL` `Prometheus` `Grafana` `Argo CD` `Argo Rollouts` `NATS` `Istio (Ambient)` `Kiali` `Knative` `Kourier` `GitHub Actions` `Node.js` `CRDs & Controllers`
+
+## Key Highlights
+
+- **Containers & Orchestration** – Deployed multi-container applications with Kubernetes manifests, Ingress, volumes, and health probes
+- **Configuration & Secrets** – Managed ConfigMaps, secrets, and environment-based configuration across environments
+- **Databases** – StatefulSets with PostgreSQL, resource requests/limits, and readiness/liveness probes
+- **CI/CD & GitOps** – Automated builds with GitHub Actions, declarative delivery with Argo CD, progressive delivery with Argo Rollouts
+- **Messaging** – NATS-based pub/sub between todo-app and broadcaster
+- **Observability** – Prometheus metrics and Grafana dashboards
+- **Service Mesh** – Istio in Ambient mode with traffic splitting and Kiali visualization
+- **Serverless** – Knative Serving with Kourier, scale-to-zero, and traffic splitting
+- **Extensibility** – Built a custom Kubernetes CRD and controller from scratch to manage DummySite resources
+- **Platform Comparison & CNCF Landscape** – Evaluated Kubernetes distributions and mapped used projects to the CNCF landscape
 
 ## Exercise index
 
@@ -59,107 +76,17 @@ Course submission repository for the University of Helsinki DevOps with Kubernet
 
 ## Submission
 
-- Repository: https://github.com/Tejas5405/K8
-- Exercise 1.1 release: https://github.com/Tejas5405/K8/releases/tag/1.1
-- Exercise 1.1 directory at tag 1.1: https://github.com/Tejas5405/K8/tree/1.1/1.1-log-output
-- Exercise 1.2 release: https://github.com/Tejas5405/K8/releases/tag/1.2
-- Exercise 1.2 directory at tag 1.2: https://github.com/Tejas5405/K8/tree/1.2/1.2-todo-app
-- Exercise 1.3 release: https://github.com/Tejas5405/K8/releases/tag/1.3
-- Exercise 1.3 directory at tag 1.3: https://github.com/Tejas5405/K8/tree/1.3/1.1-log-output
-- Exercise 1.4 release: https://github.com/Tejas5405/K8/releases/tag/1.4
-- Exercise 1.4 directory at tag 1.4: https://github.com/Tejas5405/K8/tree/1.4/1.2-todo-app
-- Exercise 1.5 release: https://github.com/Tejas5405/K8/releases/tag/1.5
-- Exercise 1.5 directory at tag 1.5: https://github.com/Tejas5405/K8/tree/1.5/1.2-todo-app
-- Exercise 1.6 release: https://github.com/Tejas5405/K8/releases/tag/1.6
-- Exercise 1.6 directory at tag 1.6: https://github.com/Tejas5405/K8/tree/1.6/1.2-todo-app
-- Exercise 1.7 release: https://github.com/Tejas5405/K8/releases/tag/1.7
-- Exercise 1.7 directory at tag 1.7: https://github.com/Tejas5405/K8/tree/1.7/1.1-log-output
-- Exercise 1.8 release: https://github.com/Tejas5405/K8/releases/tag/1.8
-- Exercise 1.8 directory at tag 1.8: https://github.com/Tejas5405/K8/tree/1.8/1.2-todo-app
-- Exercise 1.9 release: https://github.com/Tejas5405/K8/releases/tag/1.9
-- Exercise 1.9 directory at tag 1.9: https://github.com/Tejas5405/K8/tree/1.9/1.9-ping-pong
-- Exercise 1.10 release: https://github.com/Tejas5405/K8/releases/tag/1.10
-- Exercise 1.10 directory at tag 1.10: https://github.com/Tejas5405/K8/tree/1.10/1.10-split-log
-- Exercise 1.11 release: https://github.com/Tejas5405/K8/releases/tag/1.11
-- Exercise 1.11 directory at tag 1.11: https://github.com/Tejas5405/K8/tree/1.11/storage
-- Exercise 1.12 release: https://github.com/Tejas5405/K8/releases/tag/1.12
-- Exercise 1.12 directory at tag 1.12: https://github.com/Tejas5405/K8/tree/1.12/1.2-todo-app
-- Exercise 1.13 release: https://github.com/Tejas5405/K8/releases/tag/1.13
-- Exercise 1.13 directory at tag 1.13: https://github.com/Tejas5405/K8/tree/1.13/1.2-todo-app
-- Exercise 2.1 release: https://github.com/Tejas5405/K8/releases/tag/2.1
-- Exercise 2.1 directory at tag 2.1: https://github.com/Tejas5405/K8/tree/2.1/1.1-log-output
-- Exercise 2.2 release: https://github.com/Tejas5405/K8/releases/tag/2.2
-- Exercise 2.2 directory at tag 2.2: https://github.com/Tejas5405/K8/tree/2.2/1.2-todo-app
-- Exercise 2.3 release: https://github.com/Tejas5405/K8/releases/tag/2.3
-- Exercise 2.3 directory at tag 2.3: https://github.com/Tejas5405/K8/tree/2.3/storage
-- Exercise 2.4 release: https://github.com/Tejas5405/K8/releases/tag/2.4
-- Exercise 2.4 directory at tag 2.4: https://github.com/Tejas5405/K8/tree/2.4/1.2-todo-app
-- Exercise 2.5 release: https://github.com/Tejas5405/K8/releases/tag/2.5
-- Exercise 2.5 directory at tag 2.5: https://github.com/Tejas5405/K8/tree/2.5/1.1-log-output
-- Exercise 2.6 release: https://github.com/Tejas5405/K8/releases/tag/2.6
-- Exercise 2.6 directory at tag 2.6: https://github.com/Tejas5405/K8/tree/2.6/1.2-todo-app
-- Exercise 2.7 release: https://github.com/Tejas5405/K8/releases/tag/2.7
-- Exercise 2.7 directory at tag 2.7: https://github.com/Tejas5405/K8/tree/2.7/1.9-ping-pong
-- Exercise 2.8 release: https://github.com/Tejas5405/K8/releases/tag/2.8
-- Exercise 2.8 directory at tag 2.8: https://github.com/Tejas5405/K8/tree/2.8/1.2-todo-app
-- Exercise 2.9 release: https://github.com/Tejas5405/K8/releases/tag/2.9
-- Exercise 2.9 directory at tag 2.9: https://github.com/Tejas5405/K8/tree/2.9/1.2-todo-app
-- Exercise 2.10 release: https://github.com/Tejas5405/K8/releases/tag/2.10
-- Exercise 2.10 directory at tag 2.10: https://github.com/Tejas5405/K8/tree/2.10/1.2-todo-app
-- Exercise 3.5 release: https://github.com/Tejas5405/K8/releases/tag/3.5
-- Exercise 3.5 directory at tag 3.5: https://github.com/Tejas5405/K8/tree/3.5/1.2-todo-app
-- Exercise 3.6 release: https://github.com/Tejas5405/K8/releases/tag/3.6
-- Exercise 3.6 directory at tag 3.6: https://github.com/Tejas5405/K8/tree/3.6/.github
-- Exercise 3.7 release: https://github.com/Tejas5405/K8/releases/tag/3.7
-- Exercise 3.7 directory at tag 3.7: https://github.com/Tejas5405/K8/tree/3.7/.github
-- Exercise 3.8 release: https://github.com/Tejas5405/K8/releases/tag/3.8
-- Exercise 3.8 directory at tag 3.8: https://github.com/Tejas5405/K8/tree/3.8/.github
-- Exercise 3.9 release: https://github.com/Tejas5405/K8/releases/tag/3.9
-- Exercise 3.9 directory at tag 3.9: https://github.com/Tejas5405/K8/tree/3.9/README.md
-- Exercise 3.10 release: https://github.com/Tejas5405/K8/releases/tag/3.10
-- Exercise 3.10 directory at tag 3.10: https://github.com/Tejas5405/K8/tree/3.10/.github
-- Exercise 3.11 release: https://github.com/Tejas5405/K8/releases/tag/3.11
-- Exercise 3.11 directory at tag 3.11: https://github.com/Tejas5405/K8/tree/3.11/1.2-todo-app
-- Exercise 3.12 release: https://github.com/Tejas5405/K8/releases/tag/3.12
-- Exercise 3.12 directory at tag 3.12: https://github.com/Tejas5405/K8/tree/3.12/.github
-- Exercise 4.1 release: https://github.com/Tejas5405/K8/releases/tag/4.1
-- Exercise 4.1 directory at tag 4.1: https://github.com/Tejas5405/K8/tree/4.1/1.9-ping-pong
-- Exercise 4.2 release: https://github.com/Tejas5405/K8/releases/tag/4.2
-- Exercise 4.2 directory at tag 4.2: https://github.com/Tejas5405/K8/tree/4.2/1.2-todo-app
-- Exercise 4.3 release: https://github.com/Tejas5405/K8/releases/tag/4.3
-- Exercise 4.3 directory at tag 4.3: https://github.com/Tejas5405/K8/tree/4.3/4.3-prometheus
-- Exercise 4.4 release: https://github.com/Tejas5405/K8/releases/tag/4.4
-- Exercise 4.4 directory at tag 4.4: https://github.com/Tejas5405/K8/tree/4.4/4.4-argo-rollouts
-- Exercise 4.5 release: https://github.com/Tejas5405/K8/releases/tag/4.5
-- Exercise 4.5 directory at tag 4.5: https://github.com/Tejas5405/K8/tree/4.5/1.2-todo-app
-- Exercise 4.6 release: https://github.com/Tejas5405/K8/releases/tag/4.6
-- Exercise 4.6 directory at tag 4.6: https://github.com/Tejas5405/K8/tree/4.6/4.6-messaging
-- Exercise 4.7 release: https://github.com/Tejas5405/K8/releases/tag/4.7
-- Exercise 4.7 directory at tag 4.7: https://github.com/Tejas5405/K8/tree/4.7/1.1-log-output
-- Exercise 4.8 release: https://github.com/Tejas5405/K8/releases/tag/4.8
-- Exercise 4.8 directory at tag 4.8: https://github.com/Tejas5405/K8/tree/4.8
-- Exercise 4.9 release: https://github.com/Tejas5405/K8/releases/tag/4.9
-- Exercise 4.9 directory at tag 4.9: https://github.com/Tejas5405/K8/tree/4.9/4.9-environments
-- Exercise 4.10 release: https://github.com/Tejas5405/K8/releases/tag/4.10
-- Exercise 4.10 directory at tag 4.10: https://github.com/Tejas5405/K8/tree/4.10/config-repo
-- Exercise 5.1 release: https://github.com/Tejas5405/K8/releases/tag/5.1
-- Exercise 5.1 directory at tag 5.1: https://github.com/Tejas5405/K8/tree/5.1/5.1-crd-controller
-- Exercise 5.2 release: https://github.com/Tejas5405/K8/releases/tag/5.2
-- Exercise 5.2 directory at tag 5.2: https://github.com/Tejas5405/K8/tree/5.2/5.2-istio-service-mesh
-- Exercise 5.3 release: https://github.com/Tejas5405/K8/releases/tag/5.3
-- Exercise 5.3 directory at tag 5.3: https://github.com/Tejas5405/K8/tree/5.3/5.3-log-service-mesh
-- Exercise 5.4 release: https://github.com/Tejas5405/K8/releases/tag/5.4
-- Exercise 5.4 directory at tag 5.4: https://github.com/Tejas5405/K8/tree/5.4/5.4-wikipedia-sidecar
-- Exercise 5.5 release: https://github.com/Tejas5405/K8/releases/tag/5.5
-- Exercise 5.5 directory at tag 5.5: https://github.com/Tejas5405/K8/tree/5.5/5.5-platform-comparison
-- Exercise 5.6 release: https://github.com/Tejas5405/K8/releases/tag/5.6
-- Exercise 5.6 directory at tag 5.6: https://github.com/Tejas5405/K8/tree/5.6/5.6-knative-serverless
-- Exercise 5.7 release: https://github.com/Tejas5405/K8/releases/tag/5.7
-- Exercise 5.7 directory at tag 5.7: https://github.com/Tejas5405/K8/tree/5.7/5.7-pingpong-knative
-- Exercise 5.8 release: https://github.com/Tejas5405/K8/releases/tag/5.8
-- Exercise 5.8 directory at tag 5.8: https://github.com/Tejas5405/K8/tree/5.8/5.8-cncf-landscape
-- Exercise 5.9 release: https://github.com/Tejas5405/K8/releases/tag/5.9
-- Exercise 5.9 directory at tag 5.9: https://github.com/Tejas5405/K8/tree/5.9/5.9-the-end
+- **Repository:** [github.com/Tejas5405/Devops-with-Kubernetes-2026](https://github.com/Tejas5405/Devops-with-Kubernetes-2026)
+- **All releases:** [Releases](https://github.com/Tejas5405/Devops-with-Kubernetes-2026/releases)
+
+## Course Notes
+
+- **Course:** [devopswithkubernetes.com](https://devopswithkubernetes.com/)
+- **Institution:** University of Helsinki MOOC Center
+
+---
+
+*Completed as part of the DevOps with Kubernetes 2026 course.*
 
 ## Exercise 3.9 — DBaaS vs DIY
 
